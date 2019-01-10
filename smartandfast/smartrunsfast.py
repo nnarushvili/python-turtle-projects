@@ -30,6 +30,7 @@ def setInitialPositions():
         i.shape('turtle')
         i.lt(90)
         x += 100
+    player.color('red')
 
 def setPlayfield():
     screen.penup()
