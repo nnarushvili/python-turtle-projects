@@ -9,7 +9,6 @@ screen.speed(0)
 
 actualAnswer = 0
 playerSpeed = 0
-contestantSpeed = 0.25
 
 contestant1 = turtle.Turtle()
 contestant2 = turtle.Turtle()
@@ -71,7 +70,7 @@ def setPlayfield():
     screen.fd(500)
     screen.ht()
     questionWriter.penup()
-    questionWriter.goto(-100,250)
+    questionWriter.goto(-200,230)
     questionWriter.ht()
 
 setInitialPositions()
@@ -79,92 +78,61 @@ setPlayfield()
 
 
 def answer(received):
-    if(received == actualAnswer):
-        print("Correct! +0.1, current speed = " + str(playerSpeed + 0.1))
-    else:
-        print("Incorrect! -0.1, current speed = " + str(playerSpeed - 0.1))
-    return 0.1 if received == actualAnswer else -0.1
+    return 0.2 if received == actualAnswer else -0.2
 
 def onePressed():
     global playerSpeed
-    global contestantSpeed
     playerSpeed += answer(1)
-    if(playerSpeed < 0.05):
-        playerSpeed = 0.05
-    if(playerSpeed > contestantSpeed * 2 - 0.2):
-        contestantSpeed = playerSpeed + 0.3
+    if(playerSpeed < 0.5):
+        playerSpeed = 0.5
     generateQuestion()
 def twoPressed():
     global playerSpeed
-    global contestantSpeed
     playerSpeed += answer(2)
-    if(playerSpeed < 0.05):
-        playerSpeed = 0.05
-    if(playerSpeed > contestantSpeed * 2 - 0.2):
-        contestantSpeed = playerSpeed + 0.3
+    if(playerSpeed < 0.5):
+        playerSpeed = 0.5
     generateQuestion()
 def threePressed():
     global playerSpeed
-    global contestantSpeed
     playerSpeed += answer(3)
-    if(playerSpeed < 0.05):
-        playerSpeed = 0.05
-    if(playerSpeed > contestantSpeed * 2 - 0.2):
-        contestantSpeed = playerSpeed + 0.3
+    if(playerSpeed < 0.5):
+        playerSpeed = 0.5
     generateQuestion()
 def fourPressed():
     global playerSpeed
-    global contestantSpeed
     playerSpeed += answer(4)
-    if(playerSpeed < 0.05):
-        playerSpeed = 0.05
-    if(playerSpeed > contestantSpeed * 2 - 0.2):
-        contestantSpeed = playerSpeed + 0.3
+    if(playerSpeed < 0.5):
+        playerSpeed = 0.5
     generateQuestion()
 def fivePressed():
     global playerSpeed
-    global contestantSpeed
     playerSpeed += answer(5)
-    if(playerSpeed < 0.05):
-        playerSpeed = 0.05
-    if(playerSpeed > contestantSpeed * 2 - 0.2):
-        contestantSpeed = playerSpeed + 0.3
+    if(playerSpeed < 0.5):
+        playerSpeed = 0.5
     generateQuestion()
 def sixPressed():
     global playerSpeed
-    global contestantSpeed
     playerSpeed += answer(6)
-    if(playerSpeed < 0.05):
-        playerSpeed = 0.05
-    if(playerSpeed > contestantSpeed * 2 - 0.2):
-        contestantSpeed = playerSpeed + 0.3
+    if(playerSpeed < 0.5):
+        playerSpeed = 0.5
     generateQuestion()
 def sevenPressed():
     global playerSpeed
-    global contestantSpeed
     playerSpeed += answer(7)
-    if(playerSpeed < 0.05):
-        playerSpeed = 0.05
-    if(playerSpeed > contestantSpeed * 2 - 0.2):
-        contestantSpeed = playerSpeed + 0.3
+    if(playerSpeed < 0.5):
+        playerSpeed = 0.5
     generateQuestion()
 def eightPressed():
     global playerSpeed
-    global contestantSpeed
     playerSpeed += answer(8)
-    if(playerSpeed < 0.05):
-        playerSpeed = 0.05
-    if(playerSpeed > contestantSpeed * 2 - 0.2):
-        contestantSpeed = playerSpeed + 0.3
+    if(playerSpeed < 0.5):
+        playerSpeed = 0.5
     generateQuestion()
 def ninePressed():
     global playerSpeed
-    global contestantSpeed
     playerSpeed += answer(9)
-    if(playerSpeed < 0.05):
-        playerSpeed = 0.05
-    if(playerSpeed > contestantSpeed * 2 - 0.2):
-        contestantSpeed = playerSpeed + 0.3
+    if(playerSpeed < 0.5):
+        playerSpeed = 0.5
     generateQuestion()
 
 
@@ -191,7 +159,7 @@ plusPairs = [[0,1], [0,2], [0,3], [0,4],
               [4,5]]
 
 minusPairs = [[1,2], [1,3], [1,4], [1,5], [1,6], [1,7], [1,8], [1,9], [1,10],
-              [2,3], [2,4], [2,5], [2,6], [2,7], [2,8], [2,9], [2,10], [2,11],
+              [2,3], [2,4], [2,5], [2,6], [2,7], [2,8], [2,9], [2,10] [2,11],
               [3,4], [3,5], [3,6], [3,7], [3,8], [3,9], [3,10], [3,11], [3,12],
               [4,4], [4,5], [4,6], [4,7], [4,8], [4,9], [4,10], [4,11], [4,12], [4,13],
               [5,6], [5,7], [5,8], [5,9], [5,10], [5,11], [5,12], [5,13], [5,14],
@@ -201,51 +169,19 @@ minusPairs = [[1,2], [1,3], [1,4], [1,5], [1,6], [1,7], [1,8], [1,9], [1,10],
               [9,10], [9,11], [9,12], [9,13], [9,14], [9,15], [9,16], [9,17], [9,18]]
 
 def printQuestion(questionString):
-    questionWriter.clear()
     questionWriter.write(questionString,move=False, align='left', font=('Arial',17,'bold'))
 
 def generateQuestion():
     plusOrMinus = random.randint(0,1)
-    global actualAnswer
     if(plusOrMinus == 0):
         randomInd = random.randint(0, len(plusPairs) - 1)
-        print("ind : " + str(randomInd))
         pair = plusPairs[randomInd]
-        questionString = str(pair[0]) + " + " + str(pair[1]) + " = ?"
-        actualAnswer =  pair[0] + pair[1]
+        questionString = pair[0] + " + " + pair[1] + " = ?"
+        actual = pair[0] + pair[1]
         printQuestion(questionString)
-    else:
-        randomInd = random.randint(0, len(minusPairs) - 1)
-        print("ind : " + str(randomInd))
-        pair = minusPairs[randomInd]
-        questionString = str(pair[1]) + " - " + str(pair[0]) + " = ?"
-        actualAnswer = pair[1] - pair[0]
-        printQuestion(questionString)
-        
+
 generateQuestion()
-
-def declareWinner(i):
-    questionWriter.clear()
-    questionWriter.penup()
-    questionWriter.goto(-100, 260)
-    if(i == player):
-        questionWriter.color = "Orange"
-        questionWriter.write("Y O U     W I N!", align='left', font=('Arial',17,'bold'))
-    else:
-        questionWriter.color = "Red"
-        questionWriter.write("Y O U     L O S E", align='left', font=('Arial',17,'bold'))
-
-def checkWin():
-    for i in contestants:
-        if(i.ycor() >= 201):
-            declareWinner(i)
-            return
 
 while(player.ycor() <=201):
     player.fd(playerSpeed)
-    contestant1.fd(contestantSpeed)
-    contestant2.fd(contestantSpeed)
-    contestant3.fd(contestantSpeed)
-    checkWin()
-    
     
